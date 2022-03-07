@@ -2,54 +2,37 @@
 
 using namespace std;
 
-bool IsCounting(int* str, int N)
+bool IsPrime(int num)
 {
-	for (int i = 0, count = 0; i <= N - 1; i++)
+	for (int n = 2; n < num; n++)
 	{
-		if (str[i] < str[i + 1])
-		{
-			count++;
-			if (count == N - 1)
-			{
-				cout << count << endl;
-				return true;
-			}
-		}
-		else
+		if ((num % n) == 0)
 		{
 			return false;
 		}
-
 	}
-	return false;
-}
 
+	return true;
+}
 
 int main()
 {
-	int N, str[4];
-
-	cin >> N;
-
-
-	for (int i = 0; i < N; i++)
-	{
-		cin >> str[i];
-	}
-
-	while (!IsCounting(str, N))
-	{
-	
-	int num;
+	int num, count = 0;
+	int* N;
 	cin >> num;
-	
-	int tmp = str[0];
-	for (int i = 1; i <= num; i++)
-	{
-		str[i - 1] = str[i];
-	}
-	str[num] = tmp;
 
+	N = new int[num];
+
+	for (int i = 1; i != num; i++)
+	{
+		cin >>N[i];
+		if (N[i] != 1 && IsPrime(N[i]))
+		{
+			count ++;
+		}
 	}
+	cout << count;
+
+	delete[]N;
 	return 0;
 }
