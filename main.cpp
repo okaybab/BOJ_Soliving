@@ -1,66 +1,30 @@
 #include <iostream>
-#include <math.h>
-#define MAX 100001
 
 using namespace std;
 
-bool ArrayNumber[MAX];
-void LoopPrime()
+int num[21];
+
+int Fibonachi(int n)
 {
-	for (int i = 2; i <= sqrt(MAX); i++)
-	{
-		if (ArrayNumber[i])
-			continue;
+	if (n == 0)
+		return n;
 
-		for (int j = 2; i * j <= MAX - 1; j++)
-		{
-			ArrayNumber[i * j] = true;
+	if (n == 1 || n == 2)
+		return num[n] = 1;
 
-		}
+	if (num[n] != 0)
+		return num[n];
 
-	}
-
-	ArrayNumber[1] = true;
+	return num[n] = Fibonachi(n - 1) + Fibonachi(n - 2);
 
 }
 
+
 int main()
 {
-	LoopPrime();
+	int n;
+	cin >> n;
+	cout << Fibonachi(n) << endl;
 
-	int T; 
-
-	cin >> T;
-
-	for (int Tn = 0; Tn < T; Tn++)
-	{
-		int N, A = 0, B = 0;
-		cin >> N;
-
-		if (sqrt(N) == N / 2 )
-		{
-		
-			A = B = N / 2;
-			printf("%d %d\n", A, B);
-			continue;
-		}
-
-		for (int i = (N / 2) - !((N / 2) % 2); 2 < i; i = i - 2)
-		{
-			A = i;
-			B = N - A;
-			
-		
-			if(!ArrayNumber[A] && !ArrayNumber[B])
-			{
-	
-				printf("%d %d\n", A, B);
-				break;
-			}
-
-		}
-	}
-	
 	return 0;
-
 }
