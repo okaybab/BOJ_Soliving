@@ -1,29 +1,32 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
-using namespace std;
+#include <cmath>
 
-vector<int> number;
+using namespace std;
 
 int main()
 {
-	int N;
-	cin >> N;
+	int power, n;
+	cin >> n;
 
-	for (int i = 0; i < N; i++)
+	for (int i = 0; i < n; i++)
 	{
-		int A;
-		cin >> A;
-		number.push_back(A);
-	}
+		int num = i;
+		int JisuSum = 0;
 
-	sort(number.begin(), number.end());
+		for (int jarisu = log10(i); jarisu >= 0; jarisu--)
+		{
+			JisuSum += floor(num / pow(10, jarisu));
+			num -= floor(num / pow(10, jarisu)) * pow(10, jarisu);
+		}
 
-	for (auto it = number.begin(); it < number.end(); it++)
-	{
-		cout << *it << endl;
-	}
+		if (n == (i + JisuSum))
+		{
+			cout << i;
+			return 0;
+		}
 	
+	}
+	cout << 0;
 
 	return 0;
 }
